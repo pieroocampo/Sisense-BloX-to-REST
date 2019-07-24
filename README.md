@@ -11,8 +11,8 @@ Sisense BloX widgets are a simple way to make Sisense dashboards actionable. I t
 ## Dependencies
 This tiny service uses Bottle, so you'll need that :) 
 
-`pip install json`
-`pip install bottle`
+* `pip install json`
+* `pip install bottle`
 
 ## Use
 Run the script. Test by going to /hello on a browser
