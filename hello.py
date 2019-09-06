@@ -70,7 +70,7 @@ def do_removePalette():
     return palette_response
 
 
-    @post('/createUser')
+@post('/createUser')
 def do_createUser():
     access_token = authenticate()
     user_name = request.forms['user']
