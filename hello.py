@@ -70,6 +70,53 @@ def do_removePalette():
     return palette_response
 
 
+    @post('/createUser')
+def do_createUser():
+    access_token = authenticate()
+    user_name = request.forms['user']
+    country = request.forms['country']
+
+    role = request.forms['role']
+    if role == 'Data Designer':
+        role = '5cfab3e4b612768fd37705ef'
+    elif role == 'Dashboard Designer':
+        role = '5cfab3e4b612768fd37705f5'
+    else:
+        role = '5cfab3e4b612768fd37705f6'
+
+    create_user_url = base_url + '/api/users'
+    create_user_headers = {
+        'accept': 'application/json', 
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + access_token
+    }
+    create_user_data = [{
+        'email': user_name,
+        'roleId': role,
+        'password': 'TotallySecurePassword123'
+    }]
+    create_user_response = requests.post(create_user_url, data=json.dumps(create_user_data), headers=create_user_headers)
+    user_id = create_user_response.json()[0][0]['_id']
+
+    security_data = [{
+        'server': 'LocalHost',
+        'elasticube': 'Sample ECommerce',
+        'table': 'Country',
+        'column': 'Country',
+        'datatype': 'text',
+        'shares': [{
+            'party': user_id,
+            'type': 'user'
+        }],
+        'members': [
+            country
+        ]
+    }]
+    security_url = base_url + '/api/elasticubes/datasecurity'
+    security_response = requests.post(security_url, data=json.dumps(security_data), headers=create_user_headers)
+    return security_response
+
+
 def authenticate():
     payload = {
         'username': 'username@domain.xyz',
