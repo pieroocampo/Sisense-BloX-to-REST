@@ -2,6 +2,9 @@
 A simple pass through service built on Bottle to call the Sisense REST API from BloX widgets
 
 ## Why, Though?
+
+NONE OF THIS APPLIES ANYMORE. BloX now has custom actions, so it's better to use them than an approach like this.
+
 Sisense BloX widgets are a simple way to make Sisense dashboards actionable. I thought it would make a cool demo to call the Sisense REST API directly from a BloX widget. This small service deals with the challenges of converting the BloX form input to a payload usable by the REST API:
 
 * BloX only supports POST actions, but I'd like to demo other methods (GET, PUT, DELETE, etcetera)
